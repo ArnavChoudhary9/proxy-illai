@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
   const [userIP, setUserIP] = useState<string | null>(null);
-  const [routerIP, setRouterIP] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchIPs = async () => {
@@ -12,10 +11,6 @@ const Home = () => {
         const response = await fetch("https://api.ipify.org?format=json");
         const data = await response.json();
         setUserIP(data.ip);
-
-        const routerResponse = await fetch("https://ipinfo.io/json");
-        const routerData = await routerResponse.json();
-        setRouterIP(routerData.ip);
       } catch (error) {
         console.error("Error fetching IPs:", error);
       }
@@ -30,9 +25,6 @@ const Home = () => {
       <div className="text-center">
         <p className="text-lg">
           <strong>Your IP:</strong> {userIP || "Loading..."}
-        </p>
-        <p className="text-lg">
-          <strong>Router IP:</strong> {routerIP || "Loading..."}
         </p>
       </div>
     </div>
